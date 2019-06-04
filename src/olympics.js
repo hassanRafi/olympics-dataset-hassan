@@ -1,54 +1,50 @@
 const csvToJson = require("convert-csv-to-json");
-
 const athleteEvents = require("../events.json");
 const nocRegions = csvToJson.fieldDelimiter(',').getJsonFromCsv("../data/noc_regions.csv");
 
+
 function eventsHostedPerYear(athleteEvents) {
-    return athleteEvents.reduce((acc, cur) => {
-        if (! acc.hasOwnProperty(cur.NOC)) {
-            acc[cur.NOC] = {};
-            acc[cur.NOC]["hosted"] = 1;
+    let hostedPerYear  = athleteEvents.reduce((acc, cur) => {
+        let yearSeason = cur.Year + cur.Season;
+        if (! acc.hasOwnProperty(cur.City)) {
+            acc[cur.City] = {};
+            acc[cur.City][yearSeason] = 1;
         } else {
-            acc[cur.NOC]["hosted"] += 1;
+            if (! acc[cur.City].hasOwnProperty(yearSeason)) {
+                acc[cur.City][yearSeason] = 1;
+            }
         }
         return acc;
     }, {});
+
+    for (let prop in hostedPerYear) {
+        hostedPerYear[prop] = Object.keys(hostedPerYear[prop]).length;
+    }
+
+    return hostedPerYear;
 }
 
 //console.log(eventsHostedPerYear(athleteEvents));
 
 function topTenCountriesWithMostMedals(athleteEvents, nocRegions) {
     let allCountriesWithMedalsWon = athleteEvents.reduce((acc, cur) => {
-        if (parseInt(cur.Year) > 2000) {
+        if (parseInt(cur.Year) > 2000 && cur.Medal !== "NA") {
             if (! acc.hasOwnProperty(cur.NOC)) {
                 acc[cur.NOC] = {};
-                acc[cur.NOC]['Gold'] = 0;
-                acc[cur.NOC]['Silver'] = 0;
-                acc[cur.NOC]['Bronze'] = 0;
-                if (cur.Medal === "Gold" ) {
-                    acc[cur.NOC]['Gold'] = 1;
-                } else if (cur.Medal === "Silver") {
-                    acc[cur.NOC]['Silver'] = 1;
-                } else if (cur.Medal === "Bronze") {
-                    acc[cur.NOC]['Bronze'] = 1;
-                }
+                acc[cur.NOC][cur.Medal] = 1;
+                acc[cur.NOC]["winnings"] = 1;
             } else {
-                if (cur.Medal === "Gold" ) {
-                    acc[cur.NOC]['Gold'] += 1;
-                } else if (cur.Medal === "Silver") {
-                    acc[cur.NOC]['Silver'] += 1;
-                } else if (cur.Medal === "Bronze") {
-                    acc[cur.NOC]['Bronze'] += 1;
+                if (! acc[cur.NOC].hasOwnProperty(cur.Medal)) {
+                    acc[cur.NOC][cur.Medal] = 1;
+                    acc[cur.NOC]["winnings"] += 1;
+                } else {
+                    acc[cur.NOC][cur.Medal] += 1;
+                    acc[cur.NOC]["winnings"] += 1;
                 }
             }
         }
         return acc;
     }, {});
-
-    for(let prop in allCountriesWithMedalsWon) {
-        allCountriesWithMedalsWon[prop]['winnings'] = allCountriesWithMedalsWon[prop]['Gold']    
-            + allCountriesWithMedalsWon[prop]['Silver'] + allCountriesWithMedalsWon[prop]['Bronze'];                
-    }
 
     let topTenCountriesWithMedals =  Object.keys(allCountriesWithMedalsWon)
         .sort((a, b) => allCountriesWithMedalsWon[b]['winnings'] - allCountriesWithMedalsWon[a]['winnings'])
@@ -116,8 +112,8 @@ function malesAndFemalesPerDecade(athleteEvents) {
 
 function averageAgePerSeason(athleteEvents) {
     var athleteAges = athleteEvents.reduce((acc, cur) => {
-        let age = isNaN(cur.Age) ? 0 : parseInt(cur.Age);
         if (cur.Event === "Boxing Men's Heavyweight") {
+            let age = isNaN(cur.Age) ? 0 : parseInt(cur.Age);
             if (! acc.hasOwnProperty(cur.Season)) {
                 acc[cur.Season] = {};
                 acc[cur.Season]["sumOfAges"] = age;
@@ -159,3 +155,11 @@ function medalWinnersFromIndia(athleteEvents) {
 }
 
 //console.log(medalWinnersFromIndia(athleteEvents));
+
+module.exports = {
+    "eventsHostedPerYear": eventsHostedPerYear, 
+    "topTenCountriesWithMostMedals": topTenCountriesWithMostMedals, 
+    "malesAndFemalesPerDecade": malesAndFemalesPerDecade,
+    "averageAgePerSeason": averageAgePerSeason,
+    "medalWinnersFromIndia": medalWinnersFromIndia
+}
