@@ -3,6 +3,8 @@ const csvToJson = require("convert-csv-to-json");
 const athleteEvents = require("../events.json");
 const nocRegions = csvToJson.fieldDelimiter(',').getJsonFromCsv("../data/noc_regions.csv");
 
+//console.log(athleteEvents);
+
 function eventsHostedPerYear(athleteEvents) {
     return athleteEvents.reduce((acc, cur) => {
         if (! acc.hasOwnProperty(cur.NOC)) {
@@ -58,7 +60,7 @@ function topTenCountriesWithMostMedals(athleteEvents) {
             return acc;
         }, {});
     
-    for (let prop in topTenCountriesWithMedals) {
+    for (let prop in topTenCountriesWithMedalFind) {
         delete topTenCountriesWithMedals[prop].winnings;
     }
 
@@ -68,7 +70,7 @@ function topTenCountriesWithMostMedals(athleteEvents) {
 //console.log(topTenCountriesWithMostMedals(athleteEvents));
 
 function malesAndFemalesPerDecade(athleteEvents) {
-    return athleteEvents.reduce((acc, cur) => {
+    let malesFemalesPerDecade = athleteEvents.reduce((acc, cur) => {
         var decade = `${cur.Year.slice(0, 3)}0-${cur.Year.slice(0, 3)}9`;
         if (! acc.hasOwnProperty(decade)) {
             acc[decade] = {};
@@ -88,8 +90,59 @@ function malesAndFemalesPerDecade(athleteEvents) {
         }
         return acc;
     }, {});
+
+    return Object.keys(malesFemalesPerDecade)
+        .sort((a, b) => {
+            return parseInt(a.substring(0, 4)) - parseInt(b.substring(0, 4));
+        })
+        .reduce((acc, cur) => {
+            acc[cur] = malesFemalesPerDecade[cur];
+            return acc;
+        }, {});
 }
 
 //console.log(malesAndFemalesPerDecade(athleteEvents));
 
-//Boxing Men's Heavyweight
+function averageAgePerSeason(athleteEvents) {
+    var athleteAges = athleteEvents.reduce((acc, cur) => {
+        let age = isNaN(cur.Age) ? 0 : parseInt(cur.Age);
+        if (cur.Event === "Boxing Men's Heavyweight") {
+            if (! acc.hasOwnProperty(cur.Season)) {
+                acc[cur.Season] = {};
+                acc[cur.Season]["sumOfAges"] = age;
+                acc[cur.Season]["numOfPlayers"] = 1;
+            } else {
+                acc[cur.Season]["sumOfAges"] += age;
+                acc[cur.Season]["numOfPlayers"] += 1;
+            }
+        }
+        return acc;
+    }, {});
+
+    let athleteAverageAges = {};
+    athleteAverageAges.Summer = athleteAges.Summer.sumOfAges / athleteAges.Summer.numOfPlayers;
+    athleteAverageAges.Winter = 0;
+    
+    return athleteAverageAges;
+}
+
+//console.log(averageAgePerSeason(athleteEvents));
+
+function medalWinnersFromIndia(athleteEvents) {
+    return athleteEvents.reduce((acc, cur) => {
+        if (cur.Team === "India" && cur.Medal !== "NA") {
+            if (! acc.hasOwnProperty(cur.Season)) {
+                acc[cur.Season] = {};
+                acc[cur.Season]["winners"] = [];
+                if (acc[cur.Season]["winners"].indexOf(cur.Name) === -1) {
+                    acc[cur.Season]["winners"].push(cur.Name);
+                }
+            } else {
+                if (acc[cur.Season]["winners"].indexOf(cur.Name) === -1) {
+                    acc[cur.Season]["winners"].push(cur.Name);
+                }
+            }
+        }
+        return acc;
+    }, {});
+}
