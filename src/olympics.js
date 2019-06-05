@@ -77,38 +77,46 @@ function topTenCountriesWithMostMedals(athleteEvents, nocRegions) {
 //console.log(topTenCountriesWithMostMedals(athleteEvents, nocRegions));
 
 function malesAndFemalesPerDecade(athleteEvents) {
-    let malesFemalesPerDecade = athleteEvents.reduce((acc, cur) => {
-        var decade = `${cur.Year.slice(0, 3)}0-${cur.Year.slice(0, 3)}9`;
-        if (! acc.hasOwnProperty(decade)) {
-            acc[decade] = {};
-            acc[decade]["M"] = 0;
-            acc[decade]["F"] = 0;
-            if (cur.Sex === "M") {
-                acc[decade]["M"] += 1;
-            } else {
-                acc[decade]["F"] += 1
-            }
+    let x = athleteEvents.reduce((acc, cur) => {
+        if (! acc.hasOwnProperty(cur.Year)) {
+            acc[cur.Year] = {};
+            acc[cur.Year]["name"] = {};
+            acc[cur.Year]["name"][cur.Name] = 1; // dummy value
+            acc[cur.Year][cur.Sex] = 1;
         } else {
-            if (cur.Sex === "M") {
-                acc[decade]["M"] += 1;
-            } else {
-                acc[decade]["F"] += 1;
+            if (! acc[cur.Year]["name"].hasOwnProperty(cur.Name)) {
+                acc[cur.Year]["name"][cur.Name] = 1; // dummy value
+                if (acc[cur.Year].hasOwnProperty(cur.Sex)) {
+                    acc[cur.Year][cur.Sex] += 1;
+                } else {
+                    acc[cur.Year][cur.Sex] = 1;
+                }
             }
         }
         return acc;
     }, {});
 
-    return Object.keys(malesFemalesPerDecade)
-        .sort((a, b) => {
-            return parseInt(a.substring(0, 4)) - parseInt(b.substring(0, 4));
-        })
-        .reduce((acc, cur) => {
-            acc[cur] = malesFemalesPerDecade[cur];
-            return acc;
-        }, {});
+
+    for (let prop in x) {
+        delete x[prop].name;
+    }
+
+    let newObj = {};
+    
+    for (let prop in x) {
+        var decade = `${prop.substring(0, 3)}0-${prop.substring(0, 3)}9`;
+        if (! newObj.hasOwnProperty(decade)) {
+            newObj[decade] = x[prop];
+        } else {
+            newObj[decade]["M"] += x[prop].hasOwnProperty("M") ? x[prop]["M"] : 0;
+            newObj[decade]["F"] += x[prop].hasOwnProperty("F") ? x[prop]["F"] : 0;
+        }
+    }
+
+    return newObj;
 }
 
-//console.log(malesAndFemalesPerDecade(athleteEvents));
+console.log(malesAndFemalesPerDecade(athleteEvents));
 
 function averageAgePerSeason(athleteEvents) {
     var athleteAges = athleteEvents.reduce((acc, cur) => {
