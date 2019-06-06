@@ -7,14 +7,14 @@ const funcs = require("../src/olympics.js");
 let eventsHostedPerYear = funcs.eventsHostedPerYear(athleteEvents);
 let topTenCountriesWithMostMedals = funcs.topTenCountriesWithMostMedals(athleteEvents, nocRegions);
 let malesAndFemalesPerDecade = funcs.malesAndFemalesPerDecade(athleteEvents);
-let averageAgePerSeason = funcs.averageAgePerSeason(athleteEvents);
+let averageAgePerYear = funcs.averageAgePerYear(athleteEvents);
 let medalWinnersFromIndia = funcs.medalWinnersFromIndia(athleteEvents);
 
 
 let jsonString1 = JSON.stringify(eventsHostedPerYear, null, 4);
 let jsonString2 = JSON.stringify(topTenCountriesWithMostMedals, null, 4);
 let jsonString3 = JSON.stringify(malesAndFemalesPerDecade, null, 4);
-let jsonString4 = JSON.stringify(averageAgePerSeason, null, 4);
+let jsonString4 = JSON.stringify(averageAgePerYear, null, 4);
 let jsonString5 = JSON.stringify(medalWinnersFromIndia, null, 4);
 
 fs.writeFile("../output/getEventsHostedPerYear.json", jsonString1, (err) => {

@@ -78,27 +78,26 @@ function topTenCountriesWithMostMedals(athleteEvents, nocRegions) {
 
 function malesAndFemalesPerDecade(athleteEvents) {
     let x = athleteEvents.reduce((acc, cur) => {
-        if (! acc.hasOwnProperty(cur.Year)) {
-            acc[cur.Year] = {};
-            acc[cur.Year]["name"] = {};
-            acc[cur.Year]["name"][cur.Name] = 1; // dummy value
-            acc[cur.Year][cur.Sex] = 1;
+        if (! acc.hasOwnProperty(cur.Games)) {
+            acc[cur.Games] = {};
+            acc[cur.Games]["names"] = {};
+            acc[cur.Games]["names"][cur.Name] = 1; // dummy value
+            acc[cur.Games][cur.Sex] = 1;
         } else {
-            if (! acc[cur.Year]["name"].hasOwnProperty(cur.Name)) {
-                acc[cur.Year]["name"][cur.Name] = 1; // dummy value
-                if (acc[cur.Year].hasOwnProperty(cur.Sex)) {
-                    acc[cur.Year][cur.Sex] += 1;
+            if (! acc[cur.Games]["names"].hasOwnProperty(cur.Name)) {
+                acc[cur.Games]["names"][cur.Name] = 1; // dummy value
+                if (acc[cur.Games].hasOwnProperty(cur.Sex)) {
+                    acc[cur.Games][cur.Sex] += 1;
                 } else {
-                    acc[cur.Year][cur.Sex] = 1;
+                    acc[cur.Games][cur.Sex] = 1;
                 }
             }
         }
         return acc;
     }, {});
 
-
     for (let prop in x) {
-        delete x[prop].name;
+        delete x[prop].names;
     }
 
     let newObj = {};
@@ -113,35 +112,41 @@ function malesAndFemalesPerDecade(athleteEvents) {
         }
     }
 
-    return newObj;
+    return Object.keys(newObj)
+        .sort((a, b) => {
+            return parseInt(a.substring(0, 4)) - parseInt(b.substring(0, 4));
+        })
+        .reduce((acc, cur) => {
+            acc[cur] = newObj[cur];
+            return acc;
+        }, {});
 }
 
-console.log(malesAndFemalesPerDecade(athleteEvents));
+//console.log(malesAndFemalesPerDecade(athleteEvents));
 
-function averageAgePerSeason(athleteEvents) {
+function averageAgePerYear(athleteEvents) {
     var athleteAges = athleteEvents.reduce((acc, cur) => {
-        if (cur.Event === "Boxing Men's Heavyweight") {
-            let age = isNaN(cur.Age) ? 0 : parseInt(cur.Age);
-            if (! acc.hasOwnProperty(cur.Season)) {
-                acc[cur.Season] = {};
-                acc[cur.Season]["sumOfAges"] = age;
-                acc[cur.Season]["numOfPlayers"] = 1;
+        if (cur.Event === "Boxing Men's Heavyweight" && ! isNaN(cur.Age)) {
+            if (! acc.hasOwnProperty(cur.Year)) {
+                acc[cur.Year] = {};
+                acc[cur.Year]["sumOfAges"] = parseInt(cur.Age);
+                acc[cur.Year]["numOfPlayers"] = 1;
             } else {
-                acc[cur.Season]["sumOfAges"] += age;
-                acc[cur.Season]["numOfPlayers"] += 1;
+                acc[cur.Year]["sumOfAges"] += parseInt(cur.Age);
+                acc[cur.Year]["numOfPlayers"] += 1;
             }
         }
         return acc;
     }, {});
 
-    let athleteAverageAges = {};
-    athleteAverageAges.Summer = athleteAges.Summer.sumOfAges / athleteAges.Summer.numOfPlayers;
-    athleteAverageAges.Winter = 0;
+    for (let prop in athleteAges) {
+        athleteAges[prop] = parseFloat(athleteAges[prop].sumOfAges / athleteAges[prop].numOfPlayers).toFixed(2);
+    }
     
-    return athleteAverageAges;
+    return athleteAges;
 }
 
-//console.log(averageAgePerSeason(athleteEvents));
+//console.log(averageAgePerYear(athleteEvents));
 
 function medalWinnersFromIndia(athleteEvents) {
     return athleteEvents.reduce((acc, cur) => {
@@ -168,6 +173,6 @@ module.exports = {
     "eventsHostedPerYear": eventsHostedPerYear, 
     "topTenCountriesWithMostMedals": topTenCountriesWithMostMedals, 
     "malesAndFemalesPerDecade": malesAndFemalesPerDecade,
-    "averageAgePerSeason": averageAgePerSeason,
+    "averageAgePerYear": averageAgePerYear,
     "medalWinnersFromIndia": medalWinnersFromIndia
 }
