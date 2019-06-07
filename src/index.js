@@ -31,14 +31,14 @@ fs.writeFile("../output/getTopTenCountriesWithMostMedals.json", jsonString2, (er
     console.log("The file is saved");
 });
 
-fs.writeFile("../output/getMalesAndFemalesPerDecad.json", jsonString3, (err) => {
+fs.writeFile("../output/getMalesAndFemalesPerDecade.json", jsonString3, (err) => {
     if (err) {
         throw err;
     }
     console.log("The file is saved");
 });
 
-fs.writeFile("../output/getAverageAgePerSeason.json", jsonString4, (err) => {
+fs.writeFile("../output/getAverageAgePerYear.json", jsonString4, (err) => {
     if (err) {
         throw err;
     }
