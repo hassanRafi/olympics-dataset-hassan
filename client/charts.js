@@ -22,43 +22,63 @@ fetch("../output/getAverageAgePerYear.json")
     chartForAverageAgePerYear(data);
 });
 
+fetch("../output/getMedalWinnersFromIndia.json")
+.then(response => response.json())
+.then(data => {
+    tableForMedalWinnersFromIndia(data);
+});
+
 function chartForEventsHostedPerYear(eventsHostedPerYear) {
-    let data = Object.keys(eventsHostedPerYear).reduce((acc, cur) => {
+    let numEventsHosted = Object.keys(eventsHostedPerYear).reduce((acc, cur) => {
+        if (! acc.hasOwnProperty('numTimesHosted')) {
+            acc["numTimesHosted"] = [];
+        } else {
+            acc["numTimesHosted"].push(eventsHostedPerYear[cur]);
+        }
+        return acc;
+    }, {});
+
+
+    let seriess = Object.keys(numEventsHosted).reduce((acc, cur) => {
         acc.push({
             name: cur,
-            y: eventsHostedPerYear[cur]
+            data: numEventsHosted[cur]
         });
         return acc;
     }, []);
 
     Highcharts.chart('eventsHostedPerYear', {
         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
+            type: 'column'
         },
         title: {
-            text: 'Olympics Events Hosted Per Year'
+            text: 'Olympics Events Hosted Per City'
         },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        xAxis: {
+            categories: Object.keys(eventsHostedPerYear),
+            crosshair: true
         },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                }
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'No Of Times Hosted'
             }
         },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: data
-        }]
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: seriess
     });
 }
 
@@ -259,4 +279,17 @@ function chartForAverageAgePerYear(averageAgePerYear) {
         }
     
     });
+}
+
+function tableForMedalWinnersFromIndia(medalWinnersFromIndia) {
+    let html = "";
+    for (let key in medalWinnersFromIndia) {
+        html += `<div class=${key}>\n<ul>\n`;
+        html += `<h3>${key}</h3>`;
+        for (let k of medalWinnersFromIndia[key]["winners"]) {
+            html += `<li>\n${k}\n</li>`;
+        }
+        html += "</ul>\n</div>\n";
+    }
+    document.getElementById('medalWinnersFromIndia').innerHTML = html;
 }
