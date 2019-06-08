@@ -21,47 +21,42 @@ function eventsHostedPerYear(athleteEvents) {
 //console.log(eventsHostedPerYear(athleteEvents));
 
 function topTenCountriesWithMostMedals(athleteEvents, nocRegions) {
+    // Changing the abbrevation (NOC) to full form 
+
+    let newKeys = nocRegions.reduce((acc, cur) => {
+        acc[cur.NOC] = cur.region;
+        return acc;
+    }, {});
+
     let allCountriesWithMedalsWon = filterResult(athleteEvents, 2000).reduce((acc, cur) => {
-        if (! acc.hasOwnProperty(cur.NOC)) {
-            acc[cur.NOC] = {};
-            acc[cur.NOC][cur.Medal] = 1;
+        let fullFormOfNOC = newKeys[cur.NOC];
+        if (! acc.hasOwnProperty(fullFormOfNOC)) {
+            acc[fullFormOfNOC] = {};
+            acc[fullFormOfNOC][cur.Medal] = 1;
         } else {
-            if (! acc[cur.NOC].hasOwnProperty(cur.Medal)) {
-                acc[cur.NOC][cur.Medal] = 1;
+            if (! acc[fullFormOfNOC].hasOwnProperty(cur.Medal)) {
+                acc[fullFormOfNOC][cur.Medal] = 1;
             } else {
-                acc[cur.NOC][cur.Medal] += 1;
+                acc[fullFormOfNOC][cur.Medal] += 1;
             }
         }
         return acc;
     }, {});
     
-    let countriesWithMedalsSum = Object.keys(allCountriesWithMedalsWon)
+    let topTenCountriesWithMedalsSum = Object.keys(allCountriesWithMedalsWon)
     .reduce((acc, item) => {
         acc[item] = Object.values(allCountriesWithMedalsWon[item])
             .reduce((acc, cur) => acc + cur);
         return acc;
     }, {});
 
-    let topTenCountriesWithMedals = Object.keys(countriesWithMedalsSum)
+    return Object.keys(topTenCountriesWithMedalsSum)
         .sort((a, b) => {
-            return countriesWithMedalsSum[b] - countriesWithMedalsSum[a];
+            return topTenCountriesWithMedalsSum[b] - topTenCountriesWithMedalsSum[a];
         })
         .slice(0, 10)
         .reduce((acc, cur) => {
             acc[cur] = allCountriesWithMedalsWon[cur];
-            return acc;
-        }, {});
-    
-    // Changing the abbrevation (NOC) to full form 
-    
-    let newKeys = nocRegions.reduce((acc, cur) => {
-        acc[cur.NOC] = cur.region;
-        return acc;
-    }, {});
-
-    return Object.keys(topTenCountriesWithMedals)
-        .reduce((acc, cur) => {
-            acc[newKeys[cur]] = topTenCountriesWithMedals[cur];
             return acc;
         }, {});
 }
