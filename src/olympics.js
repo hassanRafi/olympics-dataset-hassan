@@ -1,8 +1,3 @@
-const csvToJson = require("convert-csv-to-json");
-const athleteEvents = require("../events.json");
-const nocRegions = csvToJson.fieldDelimiter(',').getJsonFromCsv("../data/noc_regions.csv");
-
-
 function eventsHostedPerYear(athleteEvents) {
     let hostedPerYear  = athleteEvents.reduce((acc, cur) => {
         let yearSeason = cur.Year + cur.Season;
@@ -131,7 +126,7 @@ function malesAndFemalesPerDecade(athleteEvents) {
         }, {});
 }
 
-console.log(malesAndFemalesPerDecade(athleteEvents));
+//console.log(malesAndFemalesPerDecade(athleteEvents));
 
 function averageAgePerYear(athleteEvents) {
     var athleteAges = athleteEvents.reduce((acc, cur) => {

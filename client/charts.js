@@ -63,18 +63,31 @@ function chartForEventsHostedPerYear(eventsHostedPerYear) {
 }
 
 function chartForTopTenCountriesWithMostMedals(topTenCountriesWithMostMedals) {
-    let seriess = Object.keys(topTenCountriesWithMostMedals)
-        .reduce((acc, cur) => {
-            acc.push({
-                name: cur,
-                data: [
-                    topTenCountriesWithMostMedals[cur]["Gold"],
-                    topTenCountriesWithMostMedals[cur]["Silver"],
-                    topTenCountriesWithMostMedals[cur]["Bronze"]
-                ]
-            });
-            return acc;
-        }, []);
+    let x = Object.keys(topTenCountriesWithMostMedals).reduce((acc, cur) => {
+        if (! acc.hasOwnProperty("Gold")) {
+            acc["Gold"] = [];
+        }
+        if (! acc.hasOwnProperty("Silver")) {
+            acc["Silver"] = [];
+        }
+        if (! acc.hasOwnProperty("Bronze")) {
+            acc["Bronze"] = [];
+        }
+        acc["Gold"].push(topTenCountriesWithMostMedals[cur]["Gold"]);
+        acc["Silver"].push(topTenCountriesWithMostMedals[cur]["Silver"]);
+        acc["Bronze"].push(topTenCountriesWithMostMedals[cur]["Bronze"]);
+        return acc;
+    }, {});
+
+    let seriess = Object.keys(x).reduce((acc, cur) => {
+        acc.push({
+            name: cur,
+            data: x[cur]
+        });
+        return acc;
+    }, []);
+
+    console.log(seriess);
 
     Highcharts.chart('topTenCountriesWithMostMedals', {
         chart: {
@@ -84,7 +97,7 @@ function chartForTopTenCountriesWithMostMedals(topTenCountriesWithMostMedals) {
             text: 'Top Ten Countries With Most Medals'
         },
         xAxis: {
-            categories: ["Gold", "Silver", "Bronze"]
+            categories: Object.keys(topTenCountriesWithMostMedals)
         },
         yAxis: {
             min: 0,
@@ -192,7 +205,7 @@ function chartForAverageAgePerYear(averageAgePerYear) {
         acc['Average Age'].push(averageAgePerYear[cur]);
         return acc;
     }, {});
-    
+
     let seriess = Object.keys(objectArray).reduce((acc, cur) => {
         acc.push({
             name: cur,

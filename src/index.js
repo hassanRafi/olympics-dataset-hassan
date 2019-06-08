@@ -1,7 +1,6 @@
 const fs = require('fs');
-const csvToJson = require("convert-csv-to-json");
 const athleteEvents = require("../events.json");
-const nocRegions = csvToJson.fieldDelimiter(',').getJsonFromCsv("../data/noc_regions.csv");
+const nocRegions = require("../regions.json")
 const funcs = require("../src/olympics.js");
 
 let eventsHostedPerYear = funcs.eventsHostedPerYear(athleteEvents);
