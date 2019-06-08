@@ -87,8 +87,6 @@ function chartForTopTenCountriesWithMostMedals(topTenCountriesWithMostMedals) {
         return acc;
     }, []);
 
-    console.log(seriess);
-
     Highcharts.chart('topTenCountriesWithMostMedals', {
         chart: {
             type: 'column'
@@ -218,6 +216,12 @@ function chartForAverageAgePerYear(averageAgePerYear) {
         title: {
             text: 'Average Age Per Year in Olympics'
         },
+        xAxis: {
+            title: {
+                text: 'Years',
+            },
+            categories: Object.keys(averageAgePerYear)
+        },
         yAxis: {
             title: {
                 text: 'Average Age'
@@ -233,8 +237,7 @@ function chartForAverageAgePerYear(averageAgePerYear) {
             series: {
                 label: {
                     connectorAllowed: false
-                },
-                pointStart: 1904
+                }
             }
         },
     

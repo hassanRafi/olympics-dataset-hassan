@@ -1,150 +1,10 @@
 {
-    "Summer": {
+    "1900 Summer": {
         "winners": [
-            "Shaukat Ali",
-            "Syed Mushtaq Ali",
-            "Richard James Allen",
-            "Joseph Anthony \"Joe\" Antic",
-            "Sardar Mohammad Aslam",
-            "Vasudevan Bhaskaran",
-            "Govinda Billimogaputtaswamy",
-            "Abhinav Bindra",
-            "Lal Shah S. Bokhari",
-            "Frank Gerald Singlehurst Brewin",
-            "Richard John \"Dickie\" Carr",
-            "Dhyan Chand Bais",
-            "Bir Bahadur Chettri",
-            "Rajendra Absolem Christy",
-            "Leslie Walter Claudius",
-            "Charles Cornelius",
-            "Meldric St. Clair daLuz Vieira",
-            "Ali Iqtidar Shah Dara",
-            "Walter Louis Joseph de Sousa",
-            "Chinadorai Deshmutu",
-            "Keshav Chandra Dutt",
-            "Yogeshwar Dutt",
-            "Lionel Charles Renwick Emmett",
-            "Lawrence \"Lawrie\" Fernandes",
-            "Peter Paul Fernandes",
-            "Merwyn Fernandis",
-            "Ranganathan Francis",
-            "Manuel Frederick",
-            "Joseph Deville Thomas \"Joe\" Galibardy",
-            "Michael Anthony Gateley",
-            "Gerald Rudolph \"Gerry\" Glackan",
-            "Ernest John \"Ernie\" Goodsir-Cullen",
-            "William James \"Willie\" Goodsir-Cullen",
-            "Leslie Charles Hammond",
-            "Arthur Charles Hind",
-            "Akhtar Hussain",
-            "Sayed Muhammad Hussain",
-            "Zafar Iqbal",
-            "Khashaba Dadasaheb  Jahdav",
-            "Sayed Muhammad Jaffar",
-            "Patrick Anthony \"Pat\" Jansen",
-            "Hari Pal Kaushik",
-            "Maharaj Krishon Kaushik",
-            "Ahmed Sher Khan",
-            "Ahsan Muhammad Khan",
-            "Feroz-ud-Din \"Feroze\" Khan",
-            "Michael Kindo",
-            "Mangte Chungneijang Mary Kom",
-            "Amir Chand Kumar",
-            "Ashok Kumar",
-            "Charanjit Kumar",
-            "Sushil Kumar Solanki",
-            "Vijay Kumar",
-            "Kishan Lal",
-            "Mohinder Lal",
-            "Raghbir Lal Sharma",
-            "Shankar Pillay Laxman",
-            "Sakshi Malik",
-            "Karnam Malleswari",
-            "Somaya Muttana Maneypandey",
-            "George Eric McCarthy Marthins",
-            "Mirza Nasir-ud-Din Masood",
-            "Cyril James Michie",
-            "Masude Ali Khan Minhas",
-            "Ganesh Mollerapoovayya",
-            "Gagan Narang",
-            "Saina Nehwal",
-            "Baburao Narasappa \"Baboo\" Nimal",
-            "Richard Alexander \"Rex\" Norris",
-            "Leander Adrian Paes",
-            "Bandu Patil",
-            "Govind Perumal",
-            "Krishnamurty Perumal",
-            "Victor John \"V. J.\" Peter",
-            "Joseph \"Joe\" Phillips",
-            "Broome Eric Pinniger",
-            "Leo Hillary Knowles Pinto",
-            "Norman Gilbert Pritchard (-Trevor)",
-            "Inam-ur Rahman",
-            "Muniswamy Rajagopal",
-            "Jaswant Singh Rajput",
-            "Amarjit Singh Rana",
-            "Rajyavardhan Singh Rathore",
-            "Latif-ur Rehman",
-            "Michael E. Rocque",
-            "Reginald Neville Rodrigues",
-            "Munir Sait",
-            "Govind Rao Sawant",
-            "Allan Schofield",
-            "Frederick Stephen Seaman",
-            "Shabban Shahab-ud-Din",
-            "Muhammad Shahid",
-            "Jaman Lal Sharma",
-            "Pusarla Venkata \"P. V.\" Sindhu",
-            "Ajitpal Singh Kular",
-            "Bakshish Sandhu Singh",
-            "Balbir Singh",
-            "Balkrishan Singh Grewal",
-            "Charanjit Singh",
-            "Darshan Singh Kular",
-            "Devinder Singh",
-            "Dharam Singh",
-            "Grahanandan Nandy \"G. Nandy\" Singh",
-            "Joginder \"Gindi\" Singh",
-            "Inder \"Gogi\" Singh",
-            "Gurbux Singh",
-            "Gurdev Singh Kular",
-            "Gurmail Singh",
-            "Gurmit Singh Kullar",
-            "Harbinder Singh Chimni",
-            "Harcharan Singh",
-            "Hardyal Singh Garchey",
-            "Harmik Singh",
-            "Jagjit Singh Kular",
-            "Jaipal Singh Munda",
-            "Jaswant Singh",
-            "Kulwant Singh",
-            "Kunwar Digvijay Singh",
-            "Mukhbain Singh",
-            "Prithipal Singh",
-            "Rajinder Singh",
-            "Ravinder Pal Singh",
-            "Roop Singh Bais",
-            "Tarsem Singh Kular",
-            "Udham Singh Kular",
-            "Varinder Singh",
-            "Vijender Kumar Singh",
-            "Amit Singh Bakshi",
-            "Tarlochan Singh Bawa",
-            "Raghbir Singh Bhola",
-            "Randhir Singh Gentle",
-            "Dharam Singh Gill",
-            "Gurcharan Singh Grewal",
-            "Surinder Singh Sodhi Shokar",
-            "Balbir Singh Dosanjh, Sr.",
-            "Charles Stephen",
-            "William Patrick \"Pat\" Sullivan",
-            "Dung Dung Sylvanus",
-            "Carlyle Carrol Tapsell",
-            "Max \"Maxie\" Vaz",
-            "Sayed Muhammad Yusuf"
+            "Norman Gilbert Pritchard (-Trevor)"
         ]
     },
-    "Winter": {
+    "1924 Winter": {
         "winners": [
             "Antarge Sherpa",
             "Lhakpa Sherpa",
@@ -153,6 +13,260 @@
             "Pembra Sherpa",
             "Sange Sherpa",
             "Temba Sherpa"
+        ]
+    },
+    "1928 Summer": {
+        "winners": [
+            "Shaukat Ali",
+            "Richard James Allen",
+            "Dhyan Chand Bais",
+            "Michael Anthony Gateley",
+            "William James \"Willie\" Goodsir-Cullen",
+            "Leslie Charles Hammond",
+            "Feroz-ud-Din \"Feroze\" Khan",
+            "George Eric McCarthy Marthins",
+            "Richard Alexander \"Rex\" Norris",
+            "Broome Eric Pinniger",
+            "Michael E. Rocque",
+            "Frederick Stephen Seaman",
+            "Jaipal Singh Munda",
+            "Sayed Muhammad Yusuf"
+        ]
+    },
+    "1932 Summer": {
+        "winners": [
+            "Richard James Allen",
+            "Sardar Mohammad Aslam",
+            "Lal Shah S. Bokhari",
+            "Frank Gerald Singlehurst Brewin",
+            "Richard John \"Dickie\" Carr",
+            "Dhyan Chand Bais",
+            "Leslie Charles Hammond",
+            "Arthur Charles Hind",
+            "Sayed Muhammad Jaffar",
+            "Masude Ali Khan Minhas",
+            "Broome Eric Pinniger",
+            "Gurmit Singh Kullar",
+            "Roop Singh Bais",
+            "William Patrick \"Pat\" Sullivan",
+            "Carlyle Carrol Tapsell"
+        ]
+    },
+    "1936 Summer": {
+        "winners": [
+            "Richard James Allen",
+            "Dhyan Chand Bais",
+            "Ali Iqtidar Shah Dara",
+            "Lionel Charles Renwick Emmett",
+            "Peter Paul Fernandes",
+            "Joseph Deville Thomas \"Joe\" Galibardy",
+            "Ernest John \"Ernie\" Goodsir-Cullen",
+            "Sayed Muhammad Hussain",
+            "Sayed Muhammad Jaffar",
+            "Ahmed Sher Khan",
+            "Ahsan Muhammad Khan",
+            "Mirza Nasir-ud-Din Masood",
+            "Cyril James Michie",
+            "Baburao Narasappa \"Baboo\" Nimal",
+            "Joseph \"Joe\" Phillips",
+            "Shabban Shahab-ud-Din",
+            "Roop Singh Bais",
+            "Gurcharan Singh Grewal",
+            "Carlyle Carrol Tapsell"
+        ]
+    },
+    "1948 Summer": {
+        "winners": [
+            "Leslie Walter Claudius",
+            "Walter Louis Joseph de Sousa",
+            "Keshav Chandra Dutt",
+            "Lawrence \"Lawrie\" Fernandes",
+            "Ranganathan Francis",
+            "Gerald Rudolph \"Gerry\" Glackan",
+            "Akhtar Hussain",
+            "Patrick Anthony \"Pat\" Jansen",
+            "Amir Chand Kumar",
+            "Kishan Lal",
+            "Leo Hillary Knowles Pinto",
+            "Jaswant Singh Rajput",
+            "Latif-ur Rehman",
+            "Reginald Neville Rodrigues",
+            "Grahanandan Nandy \"G. Nandy\" Singh",
+            "Kunwar Digvijay Singh",
+            "Tarlochan Singh Bawa",
+            "Randhir Singh Gentle",
+            "Balbir Singh Dosanjh, Sr.",
+            "Max \"Maxie\" Vaz"
+        ]
+    },
+    "1952 Summer": {
+        "winners": [
+            "Leslie Walter Claudius",
+            "Meldric St. Clair daLuz Vieira",
+            "Chinadorai Deshmutu",
+            "Keshav Chandra Dutt",
+            "Ranganathan Francis",
+            "Khashaba Dadasaheb  Jahdav",
+            "Raghbir Lal Sharma",
+            "Govind Perumal",
+            "Muniswamy Rajagopal",
+            "Grahanandan Nandy \"G. Nandy\" Singh",
+            "Kunwar Digvijay Singh",
+            "Udham Singh Kular",
+            "Randhir Singh Gentle",
+            "Dharam Singh Gill",
+            "Balbir Singh Dosanjh, Sr."
+        ]
+    },
+    "1956 Summer": {
+        "winners": [
+            "Leslie Walter Claudius",
+            "Ranganathan Francis",
+            "Hari Pal Kaushik",
+            "Amir Chand Kumar",
+            "Raghbir Lal Sharma",
+            "Shankar Pillay Laxman",
+            "Govind Perumal",
+            "Bakshish Sandhu Singh",
+            "Balkrishan Singh Grewal",
+            "Gurdev Singh Kular",
+            "Hardyal Singh Garchey",
+            "Udham Singh Kular",
+            "Amit Singh Bakshi",
+            "Raghbir Singh Bhola",
+            "Randhir Singh Gentle",
+            "Balbir Singh Dosanjh, Sr.",
+            "Charles Stephen"
+        ]
+    },
+    "1960 Summer": {
+        "winners": [
+            "Joseph Anthony \"Joe\" Antic",
+            "Leslie Walter Claudius",
+            "Mohinder Lal",
+            "Shankar Pillay Laxman",
+            "Victor John \"V. J.\" Peter",
+            "Govind Rao Sawant",
+            "Jaman Lal Sharma",
+            "Charanjit Singh",
+            "Joginder \"Gindi\" Singh",
+            "Jaswant Singh",
+            "Prithipal Singh",
+            "Udham Singh Kular",
+            "Raghbir Singh Bhola"
+        ]
+    },
+    "1964 Summer": {
+        "winners": [
+            "Syed Mushtaq Ali",
+            "Hari Pal Kaushik",
+            "Mohinder Lal",
+            "Shankar Pillay Laxman",
+            "Bandu Patil",
+            "Victor John \"V. J.\" Peter",
+            "Charanjit Singh",
+            "Darshan Singh Kular",
+            "Dharam Singh",
+            "Joginder \"Gindi\" Singh",
+            "Gurbux Singh",
+            "Harbinder Singh Chimni",
+            "Jagjit Singh Kular",
+            "Prithipal Singh",
+            "Udham Singh Kular"
+        ]
+    },
+    "1968 Summer": {
+        "winners": [
+            "Rajendra Absolem Christy",
+            "Krishnamurty Perumal",
+            "Victor John \"V. J.\" Peter",
+            "Inam-ur Rahman",
+            "Munir Sait",
+            "Ajitpal Singh Kular",
+            "Balbir Singh",
+            "Inder \"Gogi\" Singh",
+            "Gurbux Singh",
+            "Harbinder Singh Chimni",
+            "Harmik Singh",
+            "Jagjit Singh Kular",
+            "Prithipal Singh",
+            "Tarsem Singh Kular"
+        ]
+    },
+    "1972 Summer": {
+        "winners": [
+            "Govinda Billimogaputtaswamy",
+            "Charles Cornelius",
+            "Manuel Frederick",
+            "Michael Kindo",
+            "Ashok Kumar",
+            "Ganesh Mollerapoovayya",
+            "Krishnamurty Perumal",
+            "Ajitpal Singh Kular",
+            "Harbinder Singh Chimni",
+            "Harcharan Singh",
+            "Harmik Singh",
+            "Kulwant Singh",
+            "Mukhbain Singh",
+            "Varinder Singh"
+        ]
+    },
+    "1980 Summer": {
+        "winners": [
+            "Vasudevan Bhaskaran",
+            "Bir Bahadur Chettri",
+            "Merwyn Fernandis",
+            "Zafar Iqbal",
+            "Maharaj Krishon Kaushik",
+            "Charanjit Kumar",
+            "Somaya Muttana Maneypandey",
+            "Amarjit Singh Rana",
+            "Allan Schofield",
+            "Muhammad Shahid",
+            "Devinder Singh",
+            "Gurmail Singh",
+            "Rajinder Singh",
+            "Ravinder Pal Singh",
+            "Surinder Singh Sodhi Shokar",
+            "Dung Dung Sylvanus"
+        ]
+    },
+    "1996 Summer": {
+        "winners": [
+            "Leander Adrian Paes"
+        ]
+    },
+    "2000 Summer": {
+        "winners": [
+            "Karnam Malleswari"
+        ]
+    },
+    "2004 Summer": {
+        "winners": [
+            "Rajyavardhan Singh Rathore"
+        ]
+    },
+    "2008 Summer": {
+        "winners": [
+            "Abhinav Bindra",
+            "Sushil Kumar Solanki",
+            "Vijender Kumar Singh"
+        ]
+    },
+    "2012 Summer": {
+        "winners": [
+            "Yogeshwar Dutt",
+            "Mangte Chungneijang Mary Kom",
+            "Sushil Kumar Solanki",
+            "Vijay Kumar",
+            "Gagan Narang",
+            "Saina Nehwal"
+        ]
+    },
+    "2016 Summer": {
+        "winners": [
+            "Sakshi Malik",
+            "Pusarla Venkata \"P. V.\" Sindhu"
         ]
     }
 }

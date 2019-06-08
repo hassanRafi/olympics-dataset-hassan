@@ -153,22 +153,29 @@ function averageAgePerYear(athleteEvents) {
 //console.log(averageAgePerYear(athleteEvents));
 
 function medalWinnersFromIndia(athleteEvents) {
-    return athleteEvents.reduce((acc, cur) => {
+    let winnersPerSeason =  athleteEvents.reduce((acc, cur) => {
         if (cur.Team === "India" && cur.Medal !== "NA") {
-            if (! acc.hasOwnProperty(cur.Season)) {
-                acc[cur.Season] = {};
-                acc[cur.Season]["winners"] = [];
-                if (acc[cur.Season]["winners"].indexOf(cur.Name) === -1) {
-                    acc[cur.Season]["winners"].push(cur.Name);
+            if (! acc.hasOwnProperty(cur.Games)) {
+                acc[cur.Games] = {};
+                acc[cur.Games]["winners"] = [];
+                if (acc[cur.Games]["winners"].indexOf(cur.Name) === -1) {
+                    acc[cur.Games]["winners"].push(cur.Name);
                 }
             } else {
-                if (acc[cur.Season]["winners"].indexOf(cur.Name) === -1) {
-                    acc[cur.Season]["winners"].push(cur.Name);
+                if (acc[cur.Games]["winners"].indexOf(cur.Name) === -1) {
+                    acc[cur.Games]["winners"].push(cur.Name);
                 }
             }
         }
         return acc;
     }, {});
+
+    return Object.keys(winnersPerSeason)
+        .sort()
+        .reduce((acc, cur) => {
+            acc[cur] = winnersPerSeason[cur];
+            return acc;
+        }, {});
 }
 
 //console.log(medalWinnersFromIndia(athleteEvents));
