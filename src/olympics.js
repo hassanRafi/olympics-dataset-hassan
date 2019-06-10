@@ -43,16 +43,16 @@ function topTenCountriesWithMostMedals(athleteEvents, nocRegions) {
         return acc;
     }, {});
     
-    let topTenCountriesWithMedalsSum = Object.keys(allCountriesWithMedalsWon)
-    .reduce((acc, item) => {
-        acc[item] = Object.values(allCountriesWithMedalsWon[item])
-            .reduce((acc, cur) => acc + cur);
-        return acc;
-    }, {});
+    let countriesWithMedalsSum = Object.keys(allCountriesWithMedalsWon)
+        .reduce((acc, item) => {
+            acc[item] = Object.values(allCountriesWithMedalsWon[item])
+                .reduce((acc, cur) => acc + cur);
+            return acc;
+        }, {});
 
-    return Object.keys(topTenCountriesWithMedalsSum)
+    return Object.keys(countriesWithMedalsSum)
         .sort((a, b) => {
-            return topTenCountriesWithMedalsSum[b] - topTenCountriesWithMedalsSum[a];
+            return countriesWithMedalsSum[b] - countriesWithMedalsSum[a];
         })
         .slice(0, 10)
         .reduce((acc, cur) => {

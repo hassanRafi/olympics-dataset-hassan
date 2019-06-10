@@ -1,28 +1,29 @@
-fetch("../output/getEventsHostedPerYear.json")
+let serverUrl = "http://127.0.0.1:8888/";
+fetch(serverUrl + "getEventsHostedPerYear.json")
 .then(response => response.json())
 .then(data => {
     chartForEventsHostedPerYear(data);
 });
 
-fetch("../output/getTopTenCountriesWithMostMedals.json")
+fetch(serverUrl + "getTopTenCountriesWithMostMedals.json")
 .then(response => response.json())
 .then(data => {
     chartForTopTenCountriesWithMostMedals(data);
 });
 
-fetch("../output/getMalesAndFemalesPerDecade.json")
+fetch(serverUrl + "getMalesAndFemalesPerDecade.json")
 .then(response => response.json())
 .then(data => {
     chartForMalesAndFemalesPerDecade(data);
 });
 
-fetch("../output/getAverageAgePerYear.json")
+fetch(serverUrl + "getAverageAgePerYear.json")
 .then(response => response.json())
 .then(data => {
     chartForAverageAgePerYear(data);
 });
 
-fetch("../output/getMedalWinnersFromIndia.json")
+fetch(serverUrl + "getMedalWinnersFromIndia.json")
 .then(response => response.json())
 .then(data => {
     tableForMedalWinnersFromIndia(data);

@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  	"server": "node node_modules/http-server/bin/http-server",
-  	"start": "node src/olympics.js"
+  	"server": "node server/server.js"
   },
   "author": "",
   "license": "ISC",
