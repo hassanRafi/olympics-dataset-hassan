@@ -1,19 +1,19 @@
 function eventsHostedPerYear(athleteEvents) {
-    let hostedPerYear  = athleteEvents.reduce((acc, cur) => {
-        let yearSeason = cur.Year + cur.Season;
-        if (! acc.hasOwnProperty(cur.City)) {
-            acc[cur.City] = {};
-            acc[cur.City][yearSeason] = 1;
+    let hostedPerYear  = athleteEvents.reduce((acc, event) => {
+        let yearSeason = event.Year + event.Season;
+        if (! acc.hasOwnProperty(event.City)) {
+            acc[event.City] = {};
+            acc[event.City][yearSeason] = 1;
         } else {
-            if (! acc[cur.City].hasOwnProperty(yearSeason)) {
-                acc[cur.City][yearSeason] = 1;
+            if (! acc[event.City].hasOwnProperty(yearSeason)) {
+                acc[event.City][yearSeason] = 1;
             }
         }
         return acc;
     }, {});
 
-    return Object.keys(hostedPerYear).reduce((acc, cur) => {
-        acc[cur] = Object.keys(hostedPerYear[cur]).length;
+    return Object.keys(hostedPerYear).reduce((acc, hostedPerYearKeys) => {
+        acc[hostedPerYearKeys] = Object.keys(hostedPerYear[hostedPerYearKeys]).length;
         return acc;
     }, {});
 }
@@ -23,40 +23,46 @@ function eventsHostedPerYear(athleteEvents) {
 function topTenCountriesWithMostMedals(athleteEvents, nocRegions) {
     // Changing the abbrevation (NOC) to full form 
 
-    let newKeys = nocRegions.reduce((acc, cur) => {
-        acc[cur.NOC] = cur.region;
+    let newKeys = nocRegions.reduce((acc, regions) => {
+        acc[regions.NOC] = regions.region;
         return acc;
     }, {});
 
-    let allCountriesWithMedalsWon = filterResult(athleteEvents, 2000).reduce((acc, cur) => {
-        let fullFormOfNOC = newKeys[cur.NOC];
+    console.log(newKeys);
+
+    let allCountriesWithMedalsWon = filterResult(athleteEvents, 2000).reduce((acc, country) => {
+        let fullFormOfNOC = newKeys[country.NOC];
         if (! acc.hasOwnProperty(fullFormOfNOC)) {
             acc[fullFormOfNOC] = {};
-            acc[fullFormOfNOC][cur.Medal] = 1;
+            acc[fullFormOfNOC][country.Medal] = 1;
         } else {
-            if (! acc[fullFormOfNOC].hasOwnProperty(cur.Medal)) {
-                acc[fullFormOfNOC][cur.Medal] = 1;
+            if (! acc[fullFormOfNOC].hasOwnProperty(country.Medal)) {
+                acc[fullFormOfNOC][country.Medal] = 1;
             } else {
-                acc[fullFormOfNOC][cur.Medal] += 1;
+                acc[fullFormOfNOC][country.Medal] += 1;
             }
         }
         return acc;
     }, {});
+
+    console.log(allCountriesWithMedalsWon);
     
     let countriesWithMedalsSum = Object.keys(allCountriesWithMedalsWon)
         .reduce((acc, item) => {
             acc[item] = Object.values(allCountriesWithMedalsWon[item])
-                .reduce((acc, cur) => acc + cur);
+                .reduce((acc, medalValues) => acc + medalValues);
             return acc;
         }, {});
 
+    console.log(countriesWithMedalsSum);
+
     return Object.keys(countriesWithMedalsSum)
-        .sort((a, b) => {
-            return countriesWithMedalsSum[b] - countriesWithMedalsSum[a];
+        .sort((country1, country2) => {
+            return countriesWithMedalsSum[country2] - countriesWithMedalsSum[country1];
         })
         .slice(0, 10)
-        .reduce((acc, cur) => {
-            acc[cur] = allCountriesWithMedalsWon[cur];
+        .reduce((acc, topCountryNames) => {
+            acc[topCountryNames] = allCountriesWithMedalsWon[topCountryNames];
             return acc;
         }, {});
 }
@@ -70,7 +76,7 @@ function filterResult(athleteEvents, year) {
 //console.log(topTenCountriesWithMostMedals(athleteEvents, nocRegions));
 
 function malesAndFemalesPerDecade(athleteEvents) {
-    let x = athleteEvents.reduce((acc, cur) => {
+    let malesAndFemalesWithAddedPropId = athleteEvents.reduce((acc, cur) => {
         if (! acc.hasOwnProperty(cur.Games)) {
             acc[cur.Games] = {};
             acc[cur.Games]["ids"] = {};
@@ -89,34 +95,34 @@ function malesAndFemalesPerDecade(athleteEvents) {
         return acc;
     }, {});
     
-    let y = Object.keys(x)
-        .reduce((acc, cur) => {
-            acc[cur] = {};
-            acc[cur]["M"] = x[cur].hasOwnProperty("M") ? x[cur]["M"] : 0;
-            acc[cur]["F"] = x[cur].hasOwnProperty("F") ? x[cur]["F"] : 0;
+    let malesAndFemalesWithNoIdProp = Object.keys(malesAndFemalesWithAddedPropId)
+        .reduce((acc, year) => {
+            acc[year] = {};
+            acc[year]["M"] = malesAndFemalesWithAddedPropId[year].hasOwnProperty("M") ? malesAndFemalesWithAddedPropId[year]["M"] : 0;
+            acc[year]["F"] = malesAndFemalesWithAddedPropId[year].hasOwnProperty("F") ? malesAndFemalesWithAddedPropId[year]["F"] : 0;
             return acc;
         }, {});
 
-    let z = Object.keys(y)
-        .reduce((acc, cur) => {
-            var decade = `${cur.substring(0, 3)}0-${cur.substring(0, 3)}9`;
+    let objectWithDecade = Object.keys(malesAndFemalesWithNoIdProp)
+        .reduce((acc, year) => {
+            var decade = `${year.substring(0, 3)}0-${year.substring(0, 3)}9`;
             if (! acc.hasOwnProperty(decade)) {
                 acc[decade] = {};
-                acc[decade]["M"] = y[cur]["M"];
-                acc[decade]["F"] = y[cur]["F"];
+                acc[decade]["M"] = malesAndFemalesWithNoIdProp[year]["M"];
+                acc[decade]["F"] = malesAndFemalesWithNoIdProp[year]["F"];
             } else {
-                acc[decade]["M"] += y[cur]["M"];
-                acc[decade]["F"] += y[cur]["F"];
+                acc[decade]["M"] += malesAndFemalesWithNoIdProp[year]["M"];
+                acc[decade]["F"] += malesAndFemalesWithNoIdProp[year]["F"];
             }
             return acc;
         }, {});
 
-    return Object.keys(z)
-        .sort((a, b) => {
-            return parseInt(a.substring(0, 4)) - parseInt(b.substring(0, 4));
+    return Object.keys(objectWithDecade)
+        .sort((decade1, decade2) => {
+            return parseInt(decade1.substring(0, 4)) - parseInt(decade2.substring(0, 4));
         })
-        .reduce((acc, cur) => {
-            acc[cur] = z[cur];
+        .reduce((acc, sortedDecade) => {
+            acc[sortedDecade] = objectWithDecade[sortedDecade];
             return acc;
         }, {});
 }
@@ -124,23 +130,23 @@ function malesAndFemalesPerDecade(athleteEvents) {
 //console.log(malesAndFemalesPerDecade(athleteEvents));
 
 function averageAgePerYear(athleteEvents) {
-    var athleteAges = athleteEvents.reduce((acc, cur) => {
-        if (cur.Event === "Boxing Men's Heavyweight" && ! isNaN(cur.Age)) {
-            if (! acc.hasOwnProperty(cur.Year)) {
-                acc[cur.Year] = {};
-                acc[cur.Year]["sumOfAges"] = parseInt(cur.Age);
-                acc[cur.Year]["numOfPlayers"] = 1;
+    var athleteAges = athleteEvents.reduce((acc, entries) => {
+        if (entries.Event === "Boxing Men's Heavyweight" && ! isNaN(entries.Age)) {
+            if (! acc.hasOwnProperty(entries.Year)) {
+                acc[entries.Year] = {};
+                acc[entries.Year]["sumOfAges"] = parseInt(entries.Age);
+                acc[entries.Year]["numOfPlayers"] = 1;
             } else {
-                acc[cur.Year]["sumOfAges"] += parseInt(cur.Age);
-                acc[cur.Year]["numOfPlayers"] += 1;
+                acc[entries.Year]["sumOfAges"] += parseInt(entries.Age);
+                acc[entries.Year]["numOfPlayers"] += 1;
             }
         }
         return acc;
     }, {});
 
     return Object.keys(athleteAges)
-        .reduce((acc, cur) => {
-            acc[cur] = athleteAges[cur]["sumOfAges"] / athleteAges[cur]["numOfPlayers"];
+        .reduce((acc, year) => {
+            acc[year] = athleteAges[year]["sumOfAges"] / athleteAges[year]["numOfPlayers"];
             return acc;
         }, {});
 }
@@ -148,17 +154,17 @@ function averageAgePerYear(athleteEvents) {
 //console.log(averageAgePerYear(athleteEvents));
 
 function medalWinnersFromIndia(athleteEvents) {
-    let winnersPerSeason =  athleteEvents.reduce((acc, cur) => {
-        if (cur.Team === "India" && cur.Medal !== "NA") {
-            if (! acc.hasOwnProperty(cur.Games)) {
-                acc[cur.Games] = {};
-                acc[cur.Games]["winners"] = [];
-                if (acc[cur.Games]["winners"].indexOf(cur.Name) === -1) {
-                    acc[cur.Games]["winners"].push(cur.Name);
+    let winnersPerSeason =  athleteEvents.reduce((acc, entry) => {
+        if (entry.Team === "India" && entry.Medal !== "NA") {
+            if (! acc.hasOwnProperty(entry.Games)) {
+                acc[entry.Games] = {};
+                acc[entry.Games]["winners"] = [];
+                if (acc[entry.Games]["winners"].indexOf(entry.Name) === -1) {
+                    acc[entry.Games]["winners"].push(entry.Name);
                 }
             } else {
-                if (acc[cur.Games]["winners"].indexOf(cur.Name) === -1) {
-                    acc[cur.Games]["winners"].push(cur.Name);
+                if (acc[entry.Games]["winners"].indexOf(entry.Name) === -1) {
+                    acc[entry.Games]["winners"].push(entry.Name);
                 }
             }
         }
@@ -167,8 +173,8 @@ function medalWinnersFromIndia(athleteEvents) {
 
     return Object.keys(winnersPerSeason)
         .sort()
-        .reduce((acc, cur) => {
-            acc[cur] = winnersPerSeason[cur];
+        .reduce((acc, year) => {
+            acc[year] = winnersPerSeason[year];
             return acc;
         }, {});
 }
