@@ -28,8 +28,11 @@ http.createServer(function(request, response) {
         case './getAverageAgePerYear.json':
             filePath = './output/getAverageAgePerYear.json';
             break;
-        case './getMedalWinnersFromIndia.json':
-            filePath = './output/getMedalWinnersFromIndia.json';
+        case './getMedalWinnersFromCountry.json':
+            filePath = './output/getMedalWinnersFromCountry.json';
+            break;
+        default:
+            filePath = './client/index.html';
             break;
     }
 
@@ -46,6 +49,6 @@ http.createServer(function(request, response) {
     fs.readFile(filePath, function(error, content) {
         response.writeHead(200, {'Content-Type': contentType});
         response.end(content, 'utf-8'); 
-    })
+    });
 }).listen(8888);
 console.log("Server running at http://127.0.0.1:8888");

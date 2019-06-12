@@ -23,30 +23,19 @@ fetch(serverUrl + "getAverageAgePerYear.json")
     chartForAverageAgePerYear(data);
 });
 
-fetch(serverUrl + "getMedalWinnersFromIndia.json")
+fetch(serverUrl + "getMedalWinnersFromCountry.json")
 .then(response => response.json())
 .then(data => {
-    tableForMedalWinnersFromIndia(data);
+    tableForMedalWinnersFromCountry(data);
 });
 
 function chartForEventsHostedPerYear(eventsHostedPerYear) {
-    let numEventsHosted = Object.keys(eventsHostedPerYear).reduce((acc, cur) => {
-        if (! acc.hasOwnProperty('numTimesHosted')) {
-            acc["numTimesHosted"] = [];
-        } else {
-            acc["numTimesHosted"].push(eventsHostedPerYear[cur]);
-        }
-        return acc;
-    }, {});
+    let numEventsHosted = Object.values(eventsHostedPerYear);
 
-
-    let seriess = Object.keys(numEventsHosted).reduce((acc, cur) => {
-        acc.push({
-            name: cur,
-            data: numEventsHosted[cur]
-        });
-        return acc;
-    }, []);
+    let seriess = [{
+        name: "No Of Events Hosted",
+        data: numEventsHosted
+    }];
 
     Highcharts.chart('eventsHostedPerYear', {
         chart: {
@@ -84,30 +73,19 @@ function chartForEventsHostedPerYear(eventsHostedPerYear) {
 }
 
 function chartForTopTenCountriesWithMostMedals(topTenCountriesWithMostMedals) {
-    let x = Object.keys(topTenCountriesWithMostMedals).reduce((acc, cur) => {
-        if (! acc.hasOwnProperty("Gold")) {
-            acc["Gold"] = [];
-        }
-        if (! acc.hasOwnProperty("Silver")) {
-            acc["Silver"] = [];
-        }
-        if (! acc.hasOwnProperty("Bronze")) {
-            acc["Bronze"] = [];
-        }
-        acc["Gold"].push(topTenCountriesWithMostMedals[cur]["Gold"]);
-        acc["Silver"].push(topTenCountriesWithMostMedals[cur]["Silver"]);
-        acc["Bronze"].push(topTenCountriesWithMostMedals[cur]["Bronze"]);
-        return acc;
-    }, {});
-
-    let seriess = Object.keys(x).reduce((acc, cur) => {
+    let allCountriesMedals = {};
+    allCountriesMedals["Gold"] = Object.keys(topTenCountriesWithMostMedals).map((country) => topTenCountriesWithMostMedals[country]["Gold"]);
+    allCountriesMedals["Silver"] = Object.keys(topTenCountriesWithMostMedals).map((country) => topTenCountriesWithMostMedals[country]["Silver"]);
+    allCountriesMedals["Bronze"] = Object.keys(topTenCountriesWithMostMedals).map((country) => topTenCountriesWithMostMedals[country]["Bronze"]);
+    
+    let seriess = Object.keys(allCountriesMedals).reduce((acc, cur) => {
         acc.push({
             name: cur,
-            data: x[cur]
+            data: allCountriesMedals[cur]
         });
         return acc;
     }, []);
-
+  
     Highcharts.chart('topTenCountriesWithMostMedals', {
         chart: {
             type: 'column'
@@ -163,20 +141,14 @@ function chartForTopTenCountriesWithMostMedals(topTenCountriesWithMostMedals) {
 }
 
 function chartForMalesAndFemalesPerDecade(malesAndFemalesPerDecade) {
-    let objectArray = Object.keys(malesAndFemalesPerDecade).reduce((acc, cur) => {
-        if (! acc.hasOwnProperty("M") && ! acc.hasOwnProperty("F")) {
-            acc["M"] = [];
-            acc["F"] = [];
-        }
-        acc["M"].push(malesAndFemalesPerDecade[cur]["M"]);
-        acc["F"].push(malesAndFemalesPerDecade[cur]["F"]);
-        return acc;
-    }, {});
-
-    let seriess = Object.keys(objectArray).reduce((acc, cur) => {
+    let malesAndFemales = {};
+    malesAndFemales["M"] = Object.values(malesAndFemalesPerDecade).map((elem) => elem.M);
+    malesAndFemales["F"] = Object.values(malesAndFemalesPerDecade).map((elem) => elem.F);
+    
+    let seriess = Object.keys(malesAndFemales).reduce((acc, cur) => {
         acc.push({
             name: cur,
-            data: objectArray[cur]
+            data: malesAndFemales[cur]
         });
         return acc;
     }, []);
@@ -217,21 +189,7 @@ function chartForMalesAndFemalesPerDecade(malesAndFemalesPerDecade) {
 }
 
 function chartForAverageAgePerYear(averageAgePerYear) {
-    let objectArray = Object.keys(averageAgePerYear).reduce((acc, cur) => {
-        if (! acc.hasOwnProperty('Average Age')) {
-            acc['Average Age'] = [];
-        }
-        acc['Average Age'].push(averageAgePerYear[cur]);
-        return acc;
-    }, {});
-
-    let seriess = Object.keys(objectArray).reduce((acc, cur) => {
-        acc.push({
-            name: cur,
-            data: objectArray[cur]
-        });
-        return acc;
-    }, []);
+    seriess = [{name: 'Average Age', data: Object.values(averageAgePerYear)}];
 
     Highcharts.chart('averageAgePerYear', {
         title: {
@@ -282,15 +240,15 @@ function chartForAverageAgePerYear(averageAgePerYear) {
     });
 }
 
-function tableForMedalWinnersFromIndia(medalWinnersFromIndia) {
+function tableForMedalWinnersFromCountry(medalWinnersFromCountry) {
     let html = "";
-    for (let key in medalWinnersFromIndia) {
+    for (let key in medalWinnersFromCountry) {
         html += `<div class=${key}>\n<ul>\n`;
         html += `<h3>${key}</h3>`;
-        for (let k of medalWinnersFromIndia[key]["winners"]) {
+        for (let k of medalWinnersFromCountry[key]["winners"]) {
             html += `<li>\n${k}\n</li>`;
         }
         html += "</ul>\n</div>\n";
     }
-    document.getElementById('medalWinnersFromIndia').innerHTML = html;
+    document.getElementById('medalWinnersFromCountry').innerHTML = html;
 }

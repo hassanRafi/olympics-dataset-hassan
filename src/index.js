@@ -6,47 +6,27 @@ const funcs = require("../src/olympics.js");
 let eventsHostedPerYear = funcs.eventsHostedPerYear(athleteEvents);
 let topTenCountriesWithMostMedals = funcs.topTenCountriesWithMostMedals(athleteEvents, nocRegions);
 let malesAndFemalesPerDecade = funcs.malesAndFemalesPerDecade(athleteEvents);
-let averageAgePerYear = funcs.averageAgePerYear(athleteEvents);
-let medalWinnersFromIndia = funcs.medalWinnersFromIndia(athleteEvents);
+let averageAgePerYear = funcs.averageAgePerYear(athleteEvents, "Boxing Men's Heavyweight");
+let medalWinnersFromCountry = funcs.medalWinnersFromCountry(athleteEvents, "IND");
 
 
-let jsonString1 = JSON.stringify(eventsHostedPerYear, null, 4);
-let jsonString2 = JSON.stringify(topTenCountriesWithMostMedals, null, 4);
-let jsonString3 = JSON.stringify(malesAndFemalesPerDecade, null, 4);
-let jsonString4 = JSON.stringify(averageAgePerYear, null, 4);
-let jsonString5 = JSON.stringify(medalWinnersFromIndia, null, 4);
+let eventsHostedPerYearObject = JSON.stringify(eventsHostedPerYear, null, 4);
+let topTenCountriesWithMostMedalsObject = JSON.stringify(topTenCountriesWithMostMedals, null, 4);
+let malesAndFemalesPerDecadeObject = JSON.stringify(malesAndFemalesPerDecade, null, 4);
+let averageAgePerYearObject = JSON.stringify(averageAgePerYear, null, 4);
+let medalWinnersFromCountryObject = JSON.stringify(medalWinnersFromCountry, null, 4);
 
-fs.writeFile("../output/getEventsHostedPerYear.json", jsonString1, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("The file is saved");
-});
+function writeFile(path, name) {
+    fs.writeFile(path, name, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("The file is saved");
+    });
+}
 
-fs.writeFile("../output/getTopTenCountriesWithMostMedals.json", jsonString2, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("The file is saved");
-});
-
-fs.writeFile("../output/getMalesAndFemalesPerDecade.json", jsonString3, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("The file is saved");
-});
-
-fs.writeFile("../output/getAverageAgePerYear.json", jsonString4, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("The file is saved");
-});
-
-fs.writeFile("../output/getMedalWinnersFromIndia.json", jsonString5, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("The file is saved");
-});
+writeFile("../output/getEventsHostedPerYear.json", eventsHostedPerYearObject);
+writeFile("../output/getTopTenCountriesWithMostMedals.json", topTenCountriesWithMostMedalsObject);
+writeFile("../output/getMalesAndFemalesPerDecade.json", malesAndFemalesPerDecadeObject);
+writeFile("../output/getAverageAgePerYear.json", averageAgePerYearObject);
+writeFile("../output/getMedalWinnersFromCountry.json", medalWinnersFromCountryObject);

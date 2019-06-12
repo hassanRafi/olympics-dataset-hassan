@@ -1,4 +1,4 @@
-#medalWinnersFromIndia {
+#medalWinnersFromCountry {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 0.8em;
@@ -24,6 +24,12 @@ div h3 {
     font-family: sans-serif;
 }
 
-#medalWinnersFromIndia li {
+#medalWinnersFromCountry li {
     font-size: 0.8em;
+}
+
+.chart {
+    min-width: 310px; 
+    height: 400px; 
+    margin: 0 auto;
 }
